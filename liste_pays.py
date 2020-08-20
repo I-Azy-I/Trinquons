@@ -1,4 +1,6 @@
-{
+# -- encoding: utf-8 --
+def get_data():
+    return {
   "23.07": {
     "fetes_nationales": [
       [

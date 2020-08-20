@@ -1,6 +1,7 @@
-import json
+# -- encoding: utf-8 --
 import random
 import datetime
+import liste_pays
 class Text_generator():
     def find_text(self):
         choice=random.randint(1,self.rand_sum)
@@ -18,8 +19,7 @@ class Text_generator():
     def get_text(self):
         if self.today != datetime.datetime.now().strftime("%d.%m"):
             self.today = datetime.datetime.now().strftime("%d.%m")
-            with open("liste_pays.json") as f:
-                self.data= json.load(f)
+            self.data=liste_pays.get_data()
             random.seed()
 
             self.tags_items=[]
