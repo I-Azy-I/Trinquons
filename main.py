@@ -1,6 +1,6 @@
 # -- encoding: utf-8 --
-import json
 import data
+import text_editor
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
@@ -19,14 +19,27 @@ class ConnectPage(GridLayout):
 
         self.cols = 1
         self.text=Label(text='Trinquons!')
-        self.add_widget(self.text)  # used for our grid
+        self.add_widget(self.text)
+        self.add_widget(Label())  # used for our grid
         self.button = Button()
         self.button.bind(on_press=self.button_get_text) # just take up the spot.
         self.add_widget(self.button)
+        self.input= TextInput()
+        self.add_widget(self.input)
 
     def button_get_text(self, instance):
-        text=test.get_text()
-        self.text.text=f"Trinquon pour la fête nationale de {text[0]}"
+        if self.input.text=="":
+            data=pointeur.get_text()
+        else:
+            data=pointeur.get_text(self.input.text)
+        text=data[1]
+        tag=data[0]
+        self.text.text=data[0]
+        try :
+            self.text.text=text_editor.text_affiche(tag,text)
+        except:
+            pass
+
 
         # widgets added in order, so mind the order.
 
@@ -38,6 +51,6 @@ class EpicApp(App):
 
 
 if __name__ == "__main__":
-    test= data.Text_generator()
-    test.init()
+    pointeur= data.Text_generator()
+    pointeur.init()
     EpicApp().run()
