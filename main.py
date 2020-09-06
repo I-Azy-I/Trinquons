@@ -1,7 +1,7 @@
 import data
 import text_editor
 import kivy
-
+import webbrowser
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
@@ -38,6 +38,15 @@ KV = '''
                     icon: "tag"
                     on_press:
                         root.nav_drawer.set_state("close")
+
+            OneLineAvatarListItem:
+                text: "Instagram"
+                on_press:
+                    app.tap_insta()
+                IconLeftWidget:
+                    icon: "instagram"
+                    on_press:
+                        app.tap_insta()
 
 
 Screen:
@@ -134,7 +143,8 @@ class TrinquonsApp(MDApp):
     def tap_date(self):
         date_dialog = MDDatePicker(callback=self.get_date)
         date_dialog.open()
-
+    def tap_insta(self):
+        webbrowser.open('https://www.instagram.com/drink_for_nations/')
 if __name__ == "__main__":
     pointeur= data.Text_generator()
     pointeur.init()
