@@ -97,7 +97,7 @@ class ContentNavigationDrawer(BoxLayout):
     nav_drawer = ObjectProperty()
 
 
-class TestNavigationDrawer(MDApp):
+class TrinquonsApp(MDApp):
     def build(self):
         self.date_choose=""
         self.screen=1
@@ -138,4 +138,4 @@ class TestNavigationDrawer(MDApp):
 if __name__ == "__main__":
     pointeur= data.Text_generator()
     pointeur.init()
-    TestNavigationDrawer().run()
+    TrinquonsApp().run()
