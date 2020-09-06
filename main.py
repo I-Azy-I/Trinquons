@@ -55,7 +55,7 @@ Screen:
         id: menu
         icon: "menu"
 
-        pos: 10,self.parent.top - 100
+        pos: 10,self.parent.top - 165
         on_release: app.tap_menu()
 
 
