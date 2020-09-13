@@ -2,51 +2,54 @@
 import random
 import datetime
 import liste_dates
+
+
 class Text_generator():
-    def find_text(self):
-        choice=random.randint(1,self.rand_sum)
-        i=0
-        y=0
-        #print(tags_items)
-        #print(choice)
-        while i<choice:
-            #print(f"-> {tags_items[y][1]+weight_tag}")
-            i=i+(self.tags_items[y][1]*self.weight_text)+self.weight_tag
-            y+=1
-        data=(self.tags_items[y-1][0],self.data[self.today][self.tags_items[y-1][0]][random.randint(0,len(self.data[self.today][self.tags_items[y-1][0]])-1)])
-        return data
-    def init_get_text(self):
-        #prend la date
-        #obtient la liste
-        random.seed()
 
-        self.tags_items=[]
-        self.rand_sum=(self.weight_tag*len(self.data[self.today]))#créé l'interval aléatoire selon la pondération
-        for tag_name, tag_value in self.data[self.today].items():
-            self.tags_items.append((tag_name,len(tag_value)))#génère la liste pondérée
-            self.rand_sum=self.rand_sum+(len(tag_value)*self.weight_text)
-        return True
-
-    def get_text(self, input_day=False):
-        if isinstance(input_day,str):
-            if self.today != input_day:
-                self.today=input_day
-                if not self.today in self.data:
-                    self.today="0.0"
-                    return ("",[""])
-                self.init_get_text()
+    def get_text(self):
+        if len(self.list_evenement)!=0:
+            evenement=self.list_evenement[0]
+            #print(evenement)
+            self.list_evenement.pop(0)
+            if len(self.list_evenement)==0:
+                self.update()
+            return evenement
         else:
-            if self.today !=datetime.datetime.now().strftime("%d.%m"):
-                self.today = datetime.datetime.now().strftime("%d.%m")
-                if not self.today in self.data:
-                    self.today="0.0"
-                    return ("",[""])
-                self.init_get_text()
+            return ("",["","",""])
+
 
         return self.find_text()
+    def update(self):
+        self.data=liste_dates.get_data()[self.today]
+        #print(f"1. data: {self.data}")
+        #retire les elément blacklistés
+        if self.tag_blacklist!=[]:
+            for tag in self.tag_blacklist:
+                if tag in self.data:
+                    self.data.pop(tag)
+        #print(f"2. data-blacklisted tag: {self.data}")
+        self.list_evenement=[] #liste de tout les événenemt réparties dans un ordre "aléatoire".
+        for tag_tuple in self.sequence_tag:
+            self.transition_list_evenement=[] #sers à mélanger des bouts de liste précis
+            for tag in tag_tuple:
+                if tag in self.data:
+                    for evenement in self.data[tag]:
+                        self.transition_list_evenement.append((tag, evenement))
+                        #print(f"3. transition: {self.transition_list_evenement}")
+            self.transition_list_evenement=random.sample(self.transition_list_evenement,k=len(self.transition_list_evenement))
+            self.list_evenement.extend(self.transition_list_evenement)
+            #print(f"4. list_evenement: {self.list_evenement}")
+
+
+
+
+
 
     def init(self,weight_tag=0, weight_text=1):
-        self.today="0.0"
-        self.data=liste_dates.get_data()
+        #initalise
+        random.seed()
+        self.tag_blacklist=["journee","fetes_nationales","histoire","royaute"]
+        self.today=datetime.datetime.now().strftime("%d.%m")
+        self.sequence_tag=[("fetes_nationales",),("histoire","royaute"),("journee",)]
         self.weight_tag=weight_tag
         self.weight_text=weight_text
