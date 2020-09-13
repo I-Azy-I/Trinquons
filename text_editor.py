@@ -15,4 +15,8 @@ def text_affiche(tag,text):
     elif tag=="":
         return "Trinquez pour vous même, il n'y a rien de spécial à fêter."
     elif tag== "journee":
-        return f"Trinquons pour la {text[0]}"
+        return f"Trinquons pour la {text[0]}!"
+    elif tag=="royaute"or tag=="histoire":
+        return f"Trinquons pour {text[0]}!"
+    else:
+        return f"Oups il y a une erreur"
