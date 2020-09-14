@@ -48,7 +48,7 @@ class Text_generator():
     def init(self,weight_tag=0, weight_text=1):
         #initalise
         random.seed()
-        self.tag_blacklist=["journee","fetes_nationales","histoire","royaute"]
+        self.tag_blacklist=[]
         self.today=datetime.datetime.now().strftime("%d.%m")
         self.sequence_tag=[("fetes_nationales",),("histoire","royaute"),("journee",)]
         self.weight_tag=weight_tag

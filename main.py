@@ -101,33 +101,29 @@ Screen:
                             height: self.minimum_height
 
                             MDChip:
-                                label: "Journées internaionales"
+                                label: "Journées internationales"
                                 icon: "earth"
-                                check: True
                                 callback: app.tap_chip
-                                color:0.8, 0, 0, 1
+                                color:0, 0.8, 0, 1
 
 
                             MDChip:
                                 label: "Fêtes nationales"
                                 icon: "flag-variant"
-                                check: True
                                 callback: app.tap_chip
-                                color:0.8, 0, 0, 1
+                                color:0, 0.8, 0, 1
 
                             MDChip:
                                 label: "Histoire"
                                 icon: "book-open-variant"
-                                check: True
                                 callback: app.tap_chip
-                                color:0.8, 0, 0, 1
+                                color:0, 0.8, 0, 1
 
                             MDChip:
                                 label: "Royauté"
                                 icon: "castle"
-                                check: True
                                 callback: app.tap_chip
-                                color:0.8, 0, 0, 1
+                                color:0, 0.8, 0, 1
 
 
 
@@ -207,14 +203,10 @@ class TrinquonsApp(MDApp):
         self.screen.ids.screen_manager.current = "tag"
     def tap_chip(self,instance, value):
 
-        if instance.color==[0.8, 0, 0, 1]:
-            instance.color=0, 0.8, 0, 1
-        else:
-            instance.color=0.8, 0, 0, 1
 
 
         value={
-        "Journées internaionales":"journee",
+        "Journées internationales":"journee",
         "Fêtes nationales":"fetes_nationales",
         "Histoire":"histoire",
         "Royauté":"royaute"
@@ -222,8 +214,10 @@ class TrinquonsApp(MDApp):
 
         if value in pointeur.tag_blacklist:
             pointeur.tag_blacklist.remove(value)
+            instance.color=0, 0.8, 0, 1
         else:
             pointeur.tag_blacklist.append(value)
+            instance.color=0.8, 0, 0, 1
         pointeur.update()
 
 
