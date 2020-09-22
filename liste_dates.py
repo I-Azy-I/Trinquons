@@ -2581,7 +2581,7 @@ def get_data():
         "Nicaragua"
       ],
       [
-        "l'El Salvador",
+        "le Salvador",
         "Déclaration d'indépendance de l'Espagne en 1821.",
         "El Salvador"
       ]

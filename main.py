@@ -9,6 +9,7 @@ from kivymd.uix.taptargetview import MDTapTargetView
 from kivymd.app import MDApp
 from kivy.uix.button import Button
 from kivymd.uix.picker import MDDatePicker
+from kivymd.uix.picker import MDThemePicker
 from kivymd.toast import toast
 
 kivy.require("1.11.1")
@@ -43,6 +44,16 @@ KV = '''
                         app.tap_tag()
 
             OneLineAvatarListItem:
+                text: "Theme"
+                on_press:
+                    app.tap_theme()
+                IconLeftWidget:
+                    icon: "palette-outline"
+                    on_press:
+                        app.tap_theme()
+
+
+            OneLineAvatarListItem:
                 text: "Instagram"
                 on_press:
                     app.tap_insta()
@@ -64,7 +75,6 @@ Screen:
 
             Screen:
                 name: "scr 1"
-
                 MDLabel:
                     id: label1
                     text: "Screen 1"
@@ -201,6 +211,9 @@ class TrinquonsApp(MDApp):
         webbrowser.open('https://www.instagram.com/drink_for_nations/')
     def tap_tag(self):
         self.screen.ids.screen_manager.current = "tag"
+    def tap_theme(self):
+         theme_dialog = MDThemePicker()
+         theme_dialog.open()
     def tap_chip(self,instance, value):
 
 

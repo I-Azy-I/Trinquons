@@ -20,7 +20,10 @@ class Text_generator():
 
         return self.find_text()
     def update(self):
-        self.data=liste_dates.get_data()[self.today]
+        if self.today in liste_dates.get_data():
+            self.data=liste_dates.get_data()[self.today]
+        else:
+            self.data=[""]
         #print(f"1. data: {self.data}")
         #retire les elément blacklistés
         if self.tag_blacklist!=[]:
