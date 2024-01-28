@@ -12,6 +12,9 @@ from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.picker import MDThemePicker
 from kivymd.toast import toast
 
+import os
+
+os.environ["KIVY_ORIENTATION"] = "all"
 kivy.require("1.11.1")
 KV = '''
 <ContentNavigationDrawer>:
